@@ -5,6 +5,9 @@
 
 http://imakashi.loli.fund
 
+***
+#重要更新！
+V1.6以下版本的使用者请注意，旧版本的漏洞可能会导致遭受注入攻击，请前往 http://versioncheck.yesalan.top/ 获取最新V1.6版本！
 
 ***
 
