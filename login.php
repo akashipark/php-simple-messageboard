@@ -1,7 +1,7 @@
 <!--
    项目名称：明石留言板
-   版本：V1.2
-   时间：2021-1-29
+   版本：V1.8
+   时间：2021-2-21
    
    Copyright©2021 | Akashi Soft
    遵循 CC-BY-NC-SA 版权协议
@@ -29,7 +29,7 @@ exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center>
  //验证验证码
 
   $logincaptchafinal = $_POST["logincaptcharesult"];
-  $logincaptchauser = $_POST["logincaptchauser"];
+  $logincaptchauser = htmlspecialchars($_POST["logincaptchauser"]);
   
   if(($logincaptchafinal != $logincaptchauser))
   {
@@ -47,7 +47,7 @@ exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center>
   
        //验证密码
 	
-		$password = trim($_POST['password']);
+		$password = htmlspecialchars($_POST['password']);
 		
 		if (($password == '')) {
 			// 若为空,视为未填写,提示错误

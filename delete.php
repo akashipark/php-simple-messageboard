@@ -1,7 +1,7 @@
 <!--
    项目名称：明石留言板
-   版本：V1.2
-   时间：2021-1-29
+   版本：V1.8
+   时间：2021-2-21
    
    Copyright©2021 | Akashi Soft
    遵循 CC-BY-NC-SA 版权协议
@@ -13,7 +13,7 @@
 
 <?php
 
-if( $_SERVER['HTTP_REFERER'] == "" )
+if( @$_SERVER['HTTP_REFERER'] == "" )
 {
 
 exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center></h1><br><br>');
@@ -46,7 +46,7 @@ exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center>
 $id = $_GET["id"]; 
                    
 // 从message.txt获取留言信息
-$info = file_get_contents("./database/message.txt");
+$info = @file_get_contents("./database/message.txt");
 
 // 拆分留言信息
 $messagelist = explode("@@@", $info);

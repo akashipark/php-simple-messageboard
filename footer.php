@@ -1,7 +1,7 @@
 <!--
    项目名称：明石留言板
-   版本：V1.2
-   时间：2021-1-29
+   版本：V1.8
+   时间：2021-2-21
    
    Copyright©2021 | Akashi Soft
    遵循 CC-BY-NC-SA 版权协议
@@ -19,7 +19,7 @@
 <br>
     Copyright &copy;2020-<?php echo date("Y"); ?>
      | 
-     <a class="footerlink" href='https://yesalan.top' target="_blank">Akashi Soft</a>
+     <a class="footerlink" href='https://blog.imakashi.top' target="_blank">Akashi Soft</a>
      <br>
      Design By. Akashi
      <br>

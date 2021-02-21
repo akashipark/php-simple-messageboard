@@ -1,7 +1,7 @@
 <!--
    项目名称：明石留言板
-   版本：V1.2
-   时间：2021-1-29
+   版本：V1.8
+   时间：2021-2-21
    
    Copyright©2021 | Akashi Soft
    遵循 CC-BY-NC-SA 版权协议
@@ -16,16 +16,33 @@ session_start();
 
 ?>
 
+<?php
+// 获取设置信息
+// selfsetting.dat
+$infoselfsetting = @file_get_contents("./database/selfsetting/selfsetting.dat");
+
+$infoselfsetting = rtrim($infoselfsetting, "@");
+
+if (strlen($infoselfsetting)>=8){
+
+// 拆分留言信息
+$selfsettinglist = explode("@@@", $infoselfsetting);
+
+foreach ($selfsettinglist as $key => $value) {
+    $selfsettingout = explode("##", $value); 
+      }
+  }
+?>
 
 <html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no">
   <meta http-equiv="Cache-Control" content="no-siteapp" />
-  <title><?php $nowwebname=@file_get_contents("./database/selfsetting/webname.dat"); echo $nowwebname; ?></title>
+  <title><?php echo $selfsettingout[1]; ?></title>
   <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/css/mdui.min.css">
   <script src="https://cdn.bootcdn.net/ajax/libs/mdui/1.0.1/js/mdui.min.js"></script>
-  <link rel="shortcut icon" type="image/x-icon" href="<?php $nowwebsign=@file_get_contents("./database/selfsetting/websign.dat"); echo $nowwebsign; ?>" media="screen" />
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo "$selfsettingout[2]"; ?>" media="screen" />
 
   <style>
     a {
@@ -244,7 +261,7 @@ zh_init();
 
 </head>
 <header class="mdui-appbar mdui-appbar-fixed ">
-  <body class="backgoundmode mdui-theme-layout-auto mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-white">
+  <body class="backgoundmode mdui-theme-layout-auto mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-<?php echo "$selfsettingout[0]"; ?>">
    
 
   <?php   //IP黑白名单检测
@@ -254,7 +271,7 @@ $ban=@file_get_contents("./database/ban/ban.dat");
 
 if(stripos($ban,$ip))
 {
-exit("<center><h1>Your IP [$ip] are forbiden to view this page!</h1><h2>If you have any question, please contact the webmaster</h2></center>");
+exit("<br><br><center><h1>你的IP地址 [$ip] 已被拉黑，禁止访问本网站。</h1><h2>如果你有任何疑问，请联系网站管理者。</h2></center><br><br>");
 }
 ?>
 
@@ -276,7 +293,7 @@ exit("<center><h1>Your IP [$ip] are forbiden to view this page!</h1><h2>If you h
       <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#main-drawer'}">
         <i class="mdui-icon material-icons">menu</i>
       </span>
-      <a href="" class="mdui-typo-title"><?php echo $nowwebname; ?></a>
+      <a href="" class="mdui-typo-title"><?php echo "$selfsettingout[1]"; ?></a>
 	  
 	  
 	  
@@ -292,9 +309,18 @@ exit("<center><h1>Your IP [$ip] are forbiden to view this page!</h1><h2>If you h
             &emsp;主页
           </a>
 		  
-
-
-
+		  <?php
+		  if (($selfsettingout[4] != 1)){
+			   
+		   echo "<a href=\"./about.php\" class=\"mdui-list-item\">";
+            echo "<i class=\"mdui-list-item-icon mdui-icon material-icons\">info_outline</i>";
+            echo "&emsp;关于";
+          echo "</a>  ";
+		  }else{
+			  
+		  }
+		  
+		  ?>
 
           <a href="./admin.php" class="mdui-list-item">
             <i class="mdui-list-item-icon mdui-icon material-icons">build</i>
@@ -319,7 +345,19 @@ exit("<center><h1>Your IP [$ip] are forbiden to view this page!</h1><h2>If you h
  ?>
           </a>
         </div>
-        <a href="https://yesalan.top" target="_blank" class="mdui-list-item">
+       
+		
+		
+		<div class="mdui-collapse-item ">
+          <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+          <i class="mdui-list-item-icon mdui-icon material-icons">link</i>
+            &emsp;友情链接
+            <i class="mdui-list-item-icon mdui-icon material-icons">keyboard_arrow_down</i>
+          </div>
+         
+		  <div class="mdui-collapse-item-body mdui-list">
+      
+	   <a href="https://blog.imakashi.top" target="_blank" class="mdui-list-item">
           <i class="mdui-list-item-icon mdui-icon material-icons">favorite_border</i>
           &emsp;明石's blog
         </a>
@@ -327,6 +365,10 @@ exit("<center><h1>Your IP [$ip] are forbiden to view this page!</h1><h2>If you h
           <i class="mdui-list-item-icon mdui-icon material-icons">code</i>
           &emsp;明石的Github
         </a>
+      
+          </div>
+        </div>
+		
 		
 		
 		<div class="mdui-collapse-item ">
@@ -363,8 +405,8 @@ if (file_exists("$file")) {
 
 if ( !isset($HTTP_COOKIE_VARS["countcookie"]) || $HTTP_COOKIE_VARS["countcookie"] != $day) {
         $your_c=1;
-        $lockfile=fopen("./database/temp.txt","a");
-        flock($lockfile,3);
+        $lockfile=@fopen("./database/temp.txt","a");
+        @flock($lockfile,3);
         putenv('TZ=JST-9');
  
         $t_array2 = getdate($t_now-24*3600);
@@ -387,10 +429,10 @@ if ( !isset($HTTP_COOKIE_VARS["countcookie"]) || $HTTP_COOKIE_VARS["countcookie"
         $today_c     = sprintf("%06d", $today_c);
         $yesterday_c = sprintf("%06d", $yesterday_c);
         @setcookie("countcookie","$day",$t_now+43200);
-        $fp=fopen("$file","w");
-        fputs($fp, "$total_c,$yesterday_c,$today_c,$lastday");
-        fclose($fp);
-        fclose($lockfile);
+        $fp=@fopen("$file","w");
+        @fputs($fp, "$total_c,$yesterday_c,$today_c,$lastday");
+        @fclose($fp);
+        @fclose($lockfile);
 }
 if ( empty( $your_c ) ) $your_c = 1;
 @setcookie("yourcount",$your_c+1,$t_now+43200);

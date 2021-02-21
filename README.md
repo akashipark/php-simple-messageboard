@@ -1,13 +1,10 @@
-# PHP 简易留言板
+# PHP 留言板
 ### 此项目运行于PHP，利用文本文件来储存留言信息。
 ***
 ## 演示地址
 
-http://imakashi.loli.fund
+http://testamb.yesalan.top
 
-***
-# 重要更新！
-使用V1.6以下版本的用户请注意，旧版本的漏洞可能会导致遭受注入攻击，请前往 http://versioncheck.yesalan.top/ 获取最新V1.6版本！
 
 ***
 
@@ -31,8 +28,8 @@ http://imakashi.loli.fund
 密码默认是 akashi ,如需修密码请前往 login.php 的第27、36行替换即可。
 
 ***
-### 当前版本：V1.5
-### 时间：2021-2-2
+### 当前版本：V1.8
+### 时间：2021-2-21
 
 ## 版权声明
 本程序所有权归属明石，此程序遵循 CC-BY-NC-SA 协议。<br>

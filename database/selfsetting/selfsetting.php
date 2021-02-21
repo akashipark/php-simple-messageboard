@@ -6,11 +6,10 @@
    Copyright©2021 | Akashi Soft
    遵循 CC-BY-NC-SA 版权协议
    
-   modifyallsitebandat.php
+   selfsetting.php
 -->
 
 <?php require_once( '../../header.php'); ?>
-
 
 
 <?php
@@ -25,7 +24,7 @@ exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center>
 
 <?php 
 	
-
+   
 	
  
 	// 首先判断Cookie是否有记住了用户信息
@@ -41,16 +40,24 @@ exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center>
 	}
  ?>
 
-
 <?php 
-	
-  $loadbandat = @fopen("ban.dat", "w");
-  $modifybandat = $_POST['all-modifybandat'];
-  fwrite($loadbandat, "BEGIN\n$modifybandat");
-  fclose($loadbandat);
+$themecolor = $_POST["themecolor"];
+$webname = $_POST["changewebname"];
+$websign = $_POST["changewebsign"]; 
+$maxlength = $_POST["set-maxlength"];
+$checkbox_select=$_POST["checkbox_select"];
 
-  $url = "../../admin.php";  
+				 
+// 2.拼装（组装）信息
+$selfsetting = "{$themecolor}##{$webname}##{$websign}##{$maxlength}##{$checkbox_select}@@@";
+
+// 3.将信息追加到文件中
+                                            
+ $loadselfsetting = @fopen("selfsetting.dat", "w");
+  $modifyselfsetting = $selfsetting;
+  fwrite($loadselfsetting, $modifyselfsetting);
+  fclose($loadselfsetting);
+
+			$url = "../../admin.php";  
                echo "<script language='javascript' type='text/javascript'>window.location.href='$url'</script>";  
-
-?>
- 
+ ?>

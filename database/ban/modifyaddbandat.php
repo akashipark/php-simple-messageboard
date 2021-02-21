@@ -1,7 +1,7 @@
 <!--
    项目名称：明石留言板
-   版本：V1.2
-   时间：2021-1-29
+   版本：V1.8
+   时间：2021-2-21
    
    Copyright©2021 | Akashi Soft
    遵循 CC-BY-NC-SA 版权协议
@@ -14,7 +14,7 @@
 
 <?php
 
-if( $_SERVER['HTTP_REFERER'] == "" )
+if( @$_SERVER['HTTP_REFERER'] == "" )
 {
 
 exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center></h1><br><br>');
@@ -43,9 +43,9 @@ exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center>
 
 <?php 
 	
-  $loadbandat = fopen("addban.dat", "w");
+  $loadbandat = @fopen("addban.dat", "w");
   $modifybandat = $_POST['add-modifybandat'];
-  fwrite($loadbandat, $modifybandat);
+  fwrite($loadbandat, "BEGIN\n$modifybandat");
   fclose($loadbandat);
 
   $url = "../../admin.php";  
