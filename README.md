@@ -3,7 +3,7 @@
 ***
 ## 演示地址
 
-http://testamb.yesalan.top
+http://testamb.imakashi.top
 
 
 ***
