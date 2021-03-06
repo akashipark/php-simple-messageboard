@@ -3,7 +3,7 @@
 ***
 ## 演示地址
 
-http://testamb.imakashi.top
+http://testamb.yesalan.top
 
 
 ***
@@ -28,8 +28,8 @@ http://testamb.imakashi.top
 密码默认是 akashi ,如需修密码请前往 login.php 的第27、36行替换即可。
 
 ***
-### 当前版本：V1.8
-### 时间：2021-2-21
+### 当前版本：V1.8.1
+### 时间：2021-3-06
 
 ## 版权声明
 本程序所有权归属明石，此程序遵循 CC-BY-NC-SA 协议。<br>

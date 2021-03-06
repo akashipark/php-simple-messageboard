@@ -13,40 +13,29 @@
 
 <?php 
 
-if (!file_exists("install.lock")) {
+if (!file_exists("./database/install.lock")) {
     $url = "./install.php";  
                echo "<script language='javascript' type='text/javascript'>window.location.href='$url'</script>"; 
     exit();
 }
 
 ?>
-
-
-   <div class="mdui-tab mdui-tab-centered " mdui-tab>
-  
-  <a href="#show" class="mdui-ripple mdui-ripple-white">
+<div class="mdui-tab" mdui-tab>
+  <a href="#show" class="mdui-ripple">
     <i class="mdui-icon material-icons">assignment</i>
     <label>展示留言</label>
   </a>
-  <a href="#add" class="mdui-ripple mdui-ripple-white">
+  <a href="#add" class="mdui-ripple">
     <i class="mdui-icon material-icons">border_color</i>
     <label>添加留言</label>
   </a>
-  <!--<a href="#ban" class="mdui-ripple mdui-ripple-white">
-  
-    <i class="mdui-icon material-icons">assignment_ind</i>
-    <label>小黑屋</label>
-  </a>              
-            功能预留
-                             -->
-  
-  <a href="#login" class="mdui-ripple mdui-ripple-white">
-
+  <a href="#login" class="mdui-ripple">
     <i class="mdui-icon material-icons">assignment_ind</i>
     <label>管理员登录</label>
   </a>
 </div>
 
+   
 
 
 <!-- 显示留言界面开始 -->
@@ -97,7 +86,7 @@ if (!file_exists("install.lock")) {
 	   echo ("<div class=\"mdui-card\">
   
   <div class=\"mdui-card-primary\">
-  <div class=\"mdui-card-primary-title\"> 「Hello, from V1.8」</div>
+  <div class=\"mdui-card-primary-title\"> 「Hello, from V1.8.1」</div>
   <div class=\"mdui-card-primary-subtitle\">2021-2-21</div>
   </div>
   <div class=\"mdui-card-content\" style=\"word-break:break-all;\">你好，欢迎使用明石留言板！<br>(当有留言后本条提示会自动删除)</div>
@@ -113,6 +102,8 @@ if (!file_exists("install.lock")) {
 </div>
 
 <!-- 显示留言界面结束 -->
+
+
 
 <!-- 登录界面开始 -->
 
@@ -173,6 +164,7 @@ $logincaptcharesult = $loginCAPTCHAnum1 + $loginCAPTCHAnum2;
 
 	<form action="add.php" method="post">
 		<div class="mdui-textfield mdui-textfield-floating-label">
+
   <label class="mdui-textfield-label">您的称呼</label>
   <input class="mdui-textfield-input" type="text" name="author" maxlength="18"/ required/>
   <div class="mdui-textfield-error">名称不能为空</div>
@@ -185,8 +177,8 @@ $logincaptcharesult = $loginCAPTCHAnum1 + $loginCAPTCHAnum2;
 </div>
 
 		<div class="mdui-textfield">
-  <textarea class="mdui-textfield-input" rows="4" placeholder="留言内容" name="content" maxlength="<?php echo "$selfsettingout[3]"; ?>"/ required/></textarea>
-  <div class="mdui-textfield-error">内容不能为空</div>
+  <textarea class="mdui-textfield-input" rows="4" placeholder="留言内容" name="content" maxlength="<?php echo "$selfsettingout[3]"; ?>"></textarea>
+ 
 </div>
 
 <?php

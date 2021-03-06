@@ -77,34 +77,17 @@ h2 {
 	
 }
 
+ 
+
 </style>
 
 <style>  
-@media (prefers-color-scheme: light) { 
+
 .backgoundmode {  
   background:url(assets/background.png); 
   
 } 
-} 
-
-
-@media (prefers-color-scheme: dark) { 
-.backgoundmode {  
-  
-} 
-
-.hellodark{
-	color:white;
-}
-} 
-
-
-@media (prefers-color-scheme: no-preference) { 
-
-}
-
 </style>
-
 
 
 <script language="JavaScript">   // 网页简繁体转换
@@ -261,7 +244,7 @@ zh_init();
 
 </head>
 <header class="mdui-appbar mdui-appbar-fixed ">
-  <body class="backgoundmode mdui-theme-layout-auto mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-<?php echo "$selfsettingout[0]"; ?>">
+  <body class="backgoundmode mdui-theme-layout-light mdui-drawer-body-left mdui-appbar-with-toolbar mdui-theme-primary-<?php echo "$selfsettingout[0]"; ?>">
    
 
   <?php   //IP黑白名单检测
@@ -276,28 +259,47 @@ exit("<br><br><center><h1>你的IP地址 [$ip] 已被拉黑，禁止访问本网
 ?>
 
 
-   <div class="mdui-fab-wrapper" mdui-fab="">
-      <button class="mdui-fab mdui-ripple mdui-color-theme-accent mdui-fab-opened">
-        <i class="mdui-icon material-icons">language</i>
-        <i class="mdui-icon mdui-fab-opened material-icons">cached</i>
-      </button>
-      <div class="mdui-fab-dial mdui-fab-dial-show" style="height: auto;">
-        <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange mdui-fab-opened" style="transition-delay: 30ms;" onclick="zh_tran('s');">简</button>
-        <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink mdui-fab-opened" style="transition-delay: 15ms;" onclick="zh_tran('t');">繁</button>
-		
 
-      </div>
-    </div>
+	 <?php
+		  if (($selfsettingout[6] != 1)){
+	
+		  }else{
+			  echo "<div class=\"mdui-fab-wrapper\" mdui-fab=\"\">";
+     echo " <button class=\"mdui-fab mdui-ripple mdui-color-theme-accent mdui-fab-opened\">";
+     echo "   <i class=\"mdui-icon material-icons\">language</i>";
+    echo "    <i class=\"mdui-icon mdui-fab-opened material-icons\">cached</i>";
+    echo "  </button>";
+    echo "  <div class=\"mdui-fab-dial mdui-fab-dial-show\" style=\"height: auto;\">";
+    echo "    <button class=\"mdui-fab mdui-fab-mini mdui-ripple mdui-color-orange mdui-fab-opened\" style=\"transition-delay: 30ms;\" onclick=\"zh_tran('s');\">简</button>";
+    echo "    <button class=\"mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink mdui-fab-opened\" style=\"transition-delay: 15ms;\" onclick=\"zh_tran('t');\">繁</button>";
+      echo "</div>";
+   echo " </div> ";
+		  }
+		  
+		  ?>
+	
+	
    
     <div class="mdui-toolbar mdui-color-theme">
       <span class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white" mdui-drawer="{target: '#main-drawer'}">
         <i class="mdui-icon material-icons">menu</i>
       </span>
       <a href="" class="mdui-typo-title"><?php echo "$selfsettingout[1]"; ?></a>
+	  <div class="mdui-toolbar-spacer"></div>
+
+
+<!--   搜索框   -->
+<div class="mdui-textfield mdui-textfield-expandable mdui-float-right">
+  <button class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></button>
+  <input class="mdui-textfield-input" type="text" placeholder="Search"/>
+  <button class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
+
+  
+</div>	  
+
 	  
-	  
-	  
-	  
+
+	
 
   </div>
     </header>
@@ -310,7 +312,7 @@ exit("<br><br><center><h1>你的IP地址 [$ip] 已被拉黑，禁止访问本网
           </a>
 		  
 		  <?php
-		  if (($selfsettingout[4] != 1)){
+		  if (($selfsettingout[5] != 1)){
 			   
 		   echo "<a href=\"./about.php\" class=\"mdui-list-item\">";
             echo "<i class=\"mdui-list-item-icon mdui-icon material-icons\">info_outline</i>";
@@ -322,25 +324,16 @@ exit("<br><br><center><h1>你的IP地址 [$ip] 已被拉黑，禁止访问本网
 		  
 		  ?>
 
-          <a href="./admin.php" class="mdui-list-item">
-            <i class="mdui-list-item-icon mdui-icon material-icons">build</i>
-            &emsp;后台管理<?php 
+         <?php 
 	
    
 	
  
 	// 首先判断Cookie是否有记住了用户信息
-	if (isset($_COOKIE['username'])) {
-		# 若记住了用户信息,则直接传给Session
-		$_SESSION['username'] = $_COOKIE['username'];
-		$_SESSION['islogin'] = 1;
-	}
 	if (isset($_SESSION['islogin'])) {
-		echo'(已登录)';
+		echo' <a href="./admin.php" class="mdui-list-item"><i class="mdui-list-item-icon mdui-icon material-icons">build</i>&emsp;后台管理';
 	} else {
-		// 若没有登录
-		echo'(未登录)';
-		echo'';
+		
 	}
  ?>
           </a>
@@ -361,10 +354,11 @@ exit("<br><br><center><h1>你的IP地址 [$ip] 已被拉黑，禁止访问本网
           <i class="mdui-list-item-icon mdui-icon material-icons">favorite_border</i>
           &emsp;明石's blog
         </a>
-		<a href="https://github.com/akashipark" target="_blank" class="mdui-list-item">
+		<a class="mdui-list-item">
           <i class="mdui-list-item-icon mdui-icon material-icons">code</i>
           &emsp;明石的Github
         </a>
+		
       
           </div>
         </div>

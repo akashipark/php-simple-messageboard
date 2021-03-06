@@ -15,10 +15,7 @@
 	
  
 	// 首先判断Cookie是否有记住了用户信息
-	if (isset($_COOKIE['username'])) {
-		# 若记住了用户信息,则直接传给Session
-		$_SESSION['islogin'] = 1;
-	}
+	
 	if (isset($_SESSION['islogin'])) {
 		
 	} else {
@@ -33,7 +30,7 @@
 <h1 style="color:LightSteelBlue"><center>管理留言板</center></h1>
 
 
-<div class="mdui-tab mdui-tab-centered" mdui-tab>
+<div class="mdui-tab" mdui-tab>
   
   
   <a href="#info&action" class="mdui-ripple mdui-ripple-white">
@@ -46,7 +43,7 @@
   </a>
   <a href="#badword_and_action" class="mdui-ripple mdui-ripple-white">
     <i class="mdui-icon material-icons">speaker_notes_off</i>
-    <label>小黑屋管理</label>
+    <label>高级设置</label>
   </a>
   <a href="#fuction" class="mdui-ripple mdui-ripple-white">
     <i class="mdui-icon material-icons">info</i>
@@ -156,6 +153,17 @@ echo "$selfsettingout[1]";
 </div>
  <br>
 
+<div class="mdui-textfield">
+  <label class="mdui-textfield-label">输入您的昵称，只有您才能使用此昵称发表留言。不填则默认为“管理员”。</label>
+    <textarea class="mdui-textfield-input" rows="1" name="adminname">
+<?php 
+
+echo "$selfsettingout[7]";
+
+?>
+</textarea>
+</div>
+ <br>
 
 <div class="mdui-textfield">
   <label class="mdui-textfield-label">设置网站图标。在此输入图片URL地址</label>
@@ -181,18 +189,48 @@ echo "$selfsettingout[3]";
 </div>
 <br>
 
+<div class="mdui-textfield">
+  <label class="mdui-textfield-label">输入一个大于或等于1 的阿拉伯数字以限制发送留言间隔时间（单位：秒）</label>
+    <textarea class="mdui-textfield-input" rows="1" name="submittime">
+<?php 
+
+echo "$selfsettingout[4]";
+
+?>
+</textarea>
+</div>
+ <br>
+ 
+</textarea>
+</div>
+ <br>
+
 <label class="mdui-checkbox">
   <input type="checkbox" value="1" name="checkbox_select" 
   <?php
-  if(($selfsettingout[4] != 1)){
+  if(($selfsettingout[5] != 1)){
 	  
   }else{
 	  echo 'checked';
   }
   ?>/>
   <i class="mdui-checkbox-icon"></i>
- 隐藏侧边栏 “关于” 界面的入口
-</label>
+ 隐藏“关于”界面的入口
+</label><br>
+
+<label class="mdui-checkbox">
+  <input type="checkbox" value="1" name="checkbox_2" 
+  <?php
+  if(($selfsettingout[6] != 1)){
+	  
+  }else{
+	  echo 'checked';
+  }
+  ?>/>
+  <i class="mdui-checkbox-icon"></i>
+ 显示右下角简繁体切换按钮
+</label><br>
+
 
 <br>
 <br>
@@ -266,7 +304,12 @@ readfile($pathban);
     </div>
   </div>
 
+  
+  
+  
+  
   </div>
+  
 <br>
 
 
@@ -280,7 +323,7 @@ readfile($pathban);
 <center>
 <form action="http://versioncheck.imakashi.top/" method="post">
   <input type="hidden" name="versioncheck-softname" value="Akashi-Messageboard">
-  <input type="hidden" name="versioncheck-version" value="versioncheck-AMB-V1.8">
+  <input type="hidden" name="versioncheck-version" value="versioncheck-AMB-V1.8.1">
 <h2>检查更新
 <div class="mdui-chip">
   <button class="mdui-btn mdui-color-blue-100 mdui-ripple" type="submit">

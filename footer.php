@@ -18,12 +18,10 @@
 
 <br>
     Copyright &copy;2020-<?php echo date("Y"); ?>
-     | 
-     <a class="footerlink" href='https://blog.imakashi.top' target="_blank">Akashi Soft</a>
+     | <?php echo "$selfsettingout[1]"; ?>
      <br>
-     Design By. Akashi
-     <br>
-     All Rights Reserved.
+    <a class="footerlink" href='https://blog.imakashi.top' target="_blank">Akashi Soft</a>
+   
      </p>
      <center>
      </div>

@@ -34,7 +34,7 @@ require_once( 'header.php');
      
 	<form action="http://versioncheck.imakashi.top/" method="post">
   <input type="hidden" name="versioncheck-softname" value="Akashi-Messageboard">
-  <input type="hidden" name="versioncheck-version" value="versioncheck-AMB-V1.8">
+  <input type="hidden" name="versioncheck-version" value="versioncheck-AMB-V1.8.1">
 <button class="mdui-btn mdui-color-theme-accent mdui-ripple" type="submit">检查更新</button>
 	</form>
     </div>
@@ -42,7 +42,7 @@ require_once( 'header.php');
 
   <!-- 卡片的标题和副标题 -->
   <div class="mdui-card-primary">
-    <div class="mdui-card-primary-title">明石留言板 [V1.8]</div>
+    <div class="mdui-card-primary-title">明石留言板 [V1.8.1]</div>
     <div class="mdui-card-primary-subtitle">Akashi Messagebox(Without database)</div>
   </div>
 

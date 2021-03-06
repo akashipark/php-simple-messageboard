@@ -13,7 +13,7 @@
 
 <?php
 
-if( $_SERVER['HTTP_REFERER'] == "" )
+if( @$_SERVER['HTTP_REFERER'] == "" )
 {
 
 exit('<br><br><h1><center>非法操作，请勿直接访问本页面。</center></h1><br><br>');

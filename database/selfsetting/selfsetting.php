@@ -45,11 +45,16 @@ $themecolor = $_POST["themecolor"];
 $webname = $_POST["changewebname"];
 $websign = $_POST["changewebsign"]; 
 $maxlength = $_POST["set-maxlength"];
-$checkbox_select=$_POST["checkbox_select"];
+@$checkbox_select = $_POST["checkbox_select"];
+$submittime = $_POST["submittime"];
+@$checkbox_2 = $_POST["checkbox_2"];
+$adminname = $_POST["adminname"];
 
-				 
-// 2.拼装（组装）信息
-$selfsetting = "{$themecolor}##{$webname}##{$websign}##{$maxlength}##{$checkbox_select}@@@";
+
+
+	
+// 2.拼装信息
+$selfsetting = "{$themecolor}##{$webname}##{$websign}##{$maxlength}##{$submittime}##{$checkbox_select}##{$checkbox_2}##{$adminname}@@@";
 
 // 3.将信息追加到文件中
                                             
@@ -58,6 +63,6 @@ $selfsetting = "{$themecolor}##{$webname}##{$websign}##{$maxlength}##{$checkbox_
   fwrite($loadselfsetting, $modifyselfsetting);
   fclose($loadselfsetting);
 
-			$url = "../../admin.php";  
+$url = "../../admin.php";  
                echo "<script language='javascript' type='text/javascript'>window.location.href='$url'</script>";  
  ?>

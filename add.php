@@ -55,25 +55,47 @@ exit("<center><h1>你的IP地址 [$ip] 已被拉黑，禁止提交留言。</h1>
   
 ?>
 
-<?php //限制同IP多次访问
+<?php
+$title = $_POST['title']; // 获取留言标题
 
-define('TIME_OUT', 30); //定义重复操作最短的允许时间，单位秒
+$author = $_POST['author']; // 获取留言者
+
+$content = $_POST["content"]; // 留言内容
+?>
+
+
+
+
+<?php 
+	if(( $author == '管理员' || $author == 'admin' || $author == $selfsettingout[7])){
+   
+	if (isset($_SESSION['islogin'])) {
+		
+	} else {
+		// 若没有登录
+		exit("<br><br><h1><center>非管理员不得使用该称呼发表评论。</h1></center><br><br>");
+	}
+	}
+
+ ?>
+
+<?php //限制同IP多次访问
+if (!isset($_SESSION['islogin'])) {
+define('TIME_OUT',"$selfsettingout[4]"); //定义重复操作最短的允许时间，单位秒
 
 $time = time();
 if( isset($_SESSION['time']) )
 {
 if( $time - $_SESSION['time'] <= TIME_OUT ) //判断超时
 {
-  exit("<br><br><center><h1><div class=\"mdui-typo\">30秒之内只能发送一条留言，您的提交过于频繁。<a href=\"./index.php\">返回</a></div></h1></center><br><br>");
+  exit("<br><br><center><h1><div class=\"mdui-typo\"> $selfsettingout[4]秒内只能提交一次留言，您的提交过于频繁。<a href=\"./index.php\">返回</a></div></h1></center><br><br>");
 }
 }
 $_SESSION['time'] = $time;
-
+}
 ?>
 
-<?php   //进行添加留言操作
-
-
+<?php   
 //敏感词审核开始
 
  $badword = array ( 
@@ -81,14 +103,11 @@ $_SESSION['time'] = $time;
 ); 
 $badword1 = array_combine ( $badword , array_fill (0, count ( $badword ), '*' )); 
 
-$contenttest = $_POST["content"]; 
-$titletest = $_POST['title'];
-$authortest = $_POST["author"];
 
 
-$contentstr = strtr ( $contenttest , $badword1); 
-$titlestr = strtr ( $titletest , $badword1); 
-$authorstr = strtr ( $authortest , $badword1); 
+$content = strtr ( $content , $badword1); 
+$title = strtr ( $title , $badword1); 
+$author = strtr ( $author , $badword1); 
 
 //敏感词审核结束（不要问我是从哪里知道这些语言的哈哈哈）
 
@@ -96,17 +115,13 @@ $authorstr = strtr ( $authortest , $badword1);
 
 date_default_timezone_set('PRC');//设置时区中国大陆
 
-
 // 1.获取要添加的留言信息，并且补上其他辅助消息（IP地址，添加时间）
-$title = $titlestr; // 获取留言标题
-$author = $authorstr; // 获取留言者
-$content = $contentstr; // 留言内容
+
 $ip = $_SERVER["REMOTE_ADDR"]; // IP地址
 $addtime = date('Y-m-d H:i:s');// 添加时间 （时间戳的格式）
-				 
-	$browser = $_SERVER["HTTP_USER_AGENT"];		 
+$browser = $_SERVER["HTTP_USER_AGENT"];		 
 	 
-				 
+	 
 // 2.拼装（组装）留言信息
 $message = "{$title}##{$author}##{$content}##{$ip}##{$addtime}##{$browser}@@@";
 
